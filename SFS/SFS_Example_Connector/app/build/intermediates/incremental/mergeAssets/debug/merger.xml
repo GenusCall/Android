@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/src/main/assets"/></dataSet><dataSet config="debug"><source path="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/src/debug/assets"/></dataSet></merger>

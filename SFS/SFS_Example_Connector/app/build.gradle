@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "sfs2x.example.android.connector"
+        minSdkVersion 3
+        targetSdkVersion 17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:18.0.0'
+    compile files('libs/SFS2X_API_Java.jar')
+    compile files('libs/commons-lang-2.4.jar')
+    compile files('libs/jdom.jar')
+    compile files('libs/netty-3.2.2.Final.jar')
+    compile files('libs/sfs2x-client-core.jar')
+    compile files('libs/slf4j-api-1.6.1.jar')
+    compile files('libs/slf4j-simple-1.6.1.jar')
+}

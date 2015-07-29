@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/libs/netty-3.2.2.Final.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d4afed2b2038db3f5298da54314575ef194f8bd0">
+        <dex dex="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/build/intermediates/pre-dexed/debug/netty-3.2.2.Final-dc98256e7aca49dc014ae93c53aced3ebb4dc0b9.jar" />
+    </item>
+    <item
+        jar="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/libs/SFS2X_API_Java.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="dafefe350dbea9aa553d353427c6ad42813526fd">
+        <dex dex="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/build/intermediates/pre-dexed/debug/SFS2X_API_Java-3911595a35515c672154fa949ad2e5a53651406a.jar" />
+    </item>
+    <item
+        jar="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/libs/slf4j-simple-1.6.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e4beb3e72eda6f903147475593017850d0dfd8af">
+        <dex dex="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/build/intermediates/pre-dexed/debug/slf4j-simple-1.6.1-7c5ba78cc217452e1aff0ada92fad9ba4f9f0a26.jar" />
+    </item>
+    <item
+        jar="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/libs/slf4j-api-1.6.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="37ec7b9f4640c525a3b00b6fcac9ccc99f361ed3">
+        <dex dex="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/build/intermediates/pre-dexed/debug/slf4j-api-1.6.1-547da821f807aa146dd6339f88cde78cc926149d.jar" />
+    </item>
+    <item
+        jar="/home/and-dev/Android/Sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
+        <dex dex="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/build/intermediates/pre-dexed/debug/support-v4-18.0.0-6e20fc113cadd3658a5ac4abd8402fd96806155c.jar" />
+    </item>
+    <item
+        jar="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/libs/commons-lang-2.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="16313e02a793435009f1e458fa4af5d879f6fb11">
+        <dex dex="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/build/intermediates/pre-dexed/debug/commons-lang-2.4-a7145eaf1078f2c9d748cb7cd365ebd191c30686.jar" />
+    </item>
+    <item
+        jar="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/libs/sfs2x-client-core.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6484adb02798412ba2c4e0cc257ffb8296b78f2a">
+        <dex dex="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/build/intermediates/pre-dexed/debug/sfs2x-client-core-d72d8e7acb9d7bb2f26a77500f0603d6c82a2839.jar" />
+    </item>
+    <item
+        jar="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/libs/jdom.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1d04c0f321ea337f3661cf7ede8f4c6f653a8fdd">
+        <dex dex="/home/and-dev/avivpoker/SFS/SFS_Example_Connector/app/build/intermediates/pre-dexed/debug/jdom-e5d6559d43181e6dcafe84ee0330b1bd507f1dc8.jar" />
+    </item>
+
+</items>
