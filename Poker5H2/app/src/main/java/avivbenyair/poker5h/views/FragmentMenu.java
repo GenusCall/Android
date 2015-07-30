@@ -1,4 +1,4 @@
-package avivbenyair.poker5h;
+package avivbenyair.poker5h.views;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import avivbenyair.poker5h.R;
+import avivbenyair.poker5h.connectivity.GameConnectivity;
 
 /**
  * Created by and-dev on 29/07/15.

@@ -1,4 +1,4 @@
-package avivbenyair.poker5h;
+package avivbenyair.poker5h.main;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -8,6 +8,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import avivbenyair.poker5h.R;
+import avivbenyair.poker5h.bricks.Move;
+import avivbenyair.poker5h.connectivity.GameConnectivity;
+import avivbenyair.poker5h.views.FragmentMenu;
+import avivbenyair.poker5h.views.FragmentStage;
 
 
 public class MainActivity extends FragmentActivity {
@@ -23,6 +29,8 @@ public class MainActivity extends FragmentActivity {
 
     boolean loadingDialogOn;
     private ProgressDialog progress;
+    private FragmentStage fragmentStage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +39,8 @@ public class MainActivity extends FragmentActivity {
 
         initUI();
 
-        gameConnectivity = new GameConnectivity(getApplicationContext(), handler);
-        
+        gameConnectivity = new GameConnectivity(this, handler);
+
         showMenuScreen();
 
 
@@ -42,9 +50,20 @@ public class MainActivity extends FragmentActivity {
         handler = new Handler();
         loadingDialogOn = false;
         fm = getSupportFragmentManager();
+        fragmentStage = new FragmentStage(this);
+
     }
 
-    private void showMenuScreen() {
+    public void showStageScreen() {
+        FragmentStage newfragmentStage = new FragmentStage(this);
+        fragmentStage = newfragmentStage;
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.mainFrame, fragmentStage);
+        ft.commit();
+    }
+
+
+    public void showMenuScreen() {
         FragmentMenu fragmentMenu = new FragmentMenu(gameConnectivity);
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.mainFrame, fragmentMenu);
@@ -75,16 +94,30 @@ public class MainActivity extends FragmentActivity {
     }
 
 
-    public void loadingShow() {
-        if (!loadingDialogOn) {
-            loadingDialogOn = true;
-            progress = ProgressDialog.show(this, "Loading",
-                    "Looking for worthy opponent", true);
-            progress.setCancelable(false);
-        } else {
-            loadingDialogOn = false;
-            progress.dismiss();
+    public void showLoadingDialog(boolean on) {
+        if(on){
+            if (!loadingDialogOn) {
+                loadingDialogOn = true;
+                progress = ProgressDialog.show(this, "Loading",
+                        "Looking for worthy opponent", true);
+                progress.setCancelable(false);
+            }
+        }else{
+            if (loadingDialogOn) {
+                loadingDialogOn = false;
+                progress.dismiss();
+            }
         }
+
+    }
+
+
+    public void opponentNewMove(Move move) {
+        fragmentStage.opponenMoveHandler(move);
+    }
+
+    public void playerNewMove(Move move) {
+        gameConnectivity.playerMoveHandler(move);
     }
 
 

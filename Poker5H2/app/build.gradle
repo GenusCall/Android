@@ -16,7 +16,7 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
     }
-    
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,6 +28,10 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
+
+
+    compile 'com.google.collections:google-collections:1.0-rc2'
+
 
     compile files('libs/SFS2X_API_Java.jar')
     compile files('libs/commons-lang-2.4.jar')
