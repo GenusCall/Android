@@ -120,9 +120,12 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         boolean opponentStarts = false;
         if (whosStats == 1) {
             opponentStarts = false;
+            Log.d(TAG,"opponentStarts =false");
         } else {
+            Log.d(TAG,"opponentStarts =true");
             opponentStarts = true;
         }
+
         data.put("whosStarts", !(opponentStarts));
         gameConnectivity.sendApproveRequest(opponentUserID, opponentStarts);
 
@@ -137,9 +140,11 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         String opponentUserName = data.getString("userName");
         boolean whosStarts = data.getBoolean("whosStarts");
 
+        Log.d(TAG,"player Starts: "+whosStarts);
+
         Opponent opponent = new Opponent(opponentObjectID, opponentUserName);
         Player player = new Player(ParseUser.getCurrentUser().getObjectId(), ParseUser.getCurrentUser().getUsername());
-        mainActivity.startNewGame(opponent, player, whosStarts);
+        mainActivity.startNewGame(opponent, player, !whosStarts);
     }
 
     public void joinRoom(String gameID) {

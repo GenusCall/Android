@@ -11,7 +11,7 @@ public class Game {
 
     private Player player;
     private Opponent opponent;
-
+    private int handPositionY;
     private Deck deck;
     private boolean playerStarts;
 
@@ -19,7 +19,7 @@ public class Game {
     public Game(boolean playerStarts, Opponent opponent, Player player) {
 
         deck = new Deck();
-
+        handPositionY = 0;
         this.playerStarts = playerStarts;
         this.opponent = opponent;
         this.player = player;
@@ -37,6 +37,14 @@ public class Game {
 
     public Deck getDeck() {
         return deck;
+    }
+
+    public int getHandPositionY() {
+        return handPositionY;
+    }
+
+    public void setHandPositionY(int handPositionY) {
+        this.handPositionY = handPositionY;
     }
 
     public void setDeck(Deck deck) {
