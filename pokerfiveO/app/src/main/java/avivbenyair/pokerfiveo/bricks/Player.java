@@ -12,6 +12,7 @@ public class Player {
     private String objectID;
     private String userName;
     private ArrayList<ArrayList<Card>> Cards;
+    private int positionX;
 
 
     public Player(String objectID, String userName) {
@@ -26,7 +27,13 @@ public class Player {
         Cards.add(new ArrayList<Card>());
         Cards.add(new ArrayList<Card>());
         Cards.add(new ArrayList<Card>());
+
+        positionX = 0;
     }
+
+
+
+
 
 
     public void insertToPlayerCards(Move move) {
@@ -55,5 +62,13 @@ public class Player {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getPositionX() {
+        return positionX;
+    }
+
+    public void setPositionX(int positionX) {
+        this.positionX = positionX;
     }
 }

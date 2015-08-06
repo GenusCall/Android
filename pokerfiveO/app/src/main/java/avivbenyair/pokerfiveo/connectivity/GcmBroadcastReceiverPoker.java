@@ -73,8 +73,7 @@ public class GcmBroadcastReceiverPoker extends BroadcastReceiver {
                     gameRequestHandler(data);
 
                 } else if (pushType.equals(GAME_REQUEST_APPROVE_KEY)) {
-                    Log.d(TAG, "GAME_REQUEST_APPROVE_KEY");
-
+                    Log.d(TAG, "GAME_REQUEST_APPROVE_KEYzzzzzzzzzzzzzzzzzzzzz");
                     gameRequestApproveHandler(data);
 
                 }
@@ -87,14 +86,17 @@ public class GcmBroadcastReceiverPoker extends BroadcastReceiver {
     }
 
     private void gameRequestApproveHandler(JSONObject data) {
-
+        Log.d(TAG, "gameRequestApproveHandlerzzzzzzzzzzzzzzzzzzzzz");
         try {
             sharedInstances.getFragmentMenu().joinRoom(data.getString("gameID"));
             Log.d(TAG, "gameRequestApproveHandler was called | userObjectID: " + data.getString("userObjectID"));
             sharedInstances.getFragmentMenu().StartsNewGame(data);
         } catch (JSONException e) {
             e.printStackTrace();
+
         }
+
+
     }
 
     private void gameRequestHandler(JSONObject data) {

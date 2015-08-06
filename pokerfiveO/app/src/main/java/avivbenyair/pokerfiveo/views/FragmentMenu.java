@@ -1,8 +1,12 @@
 package avivbenyair.pokerfiveo.views;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +20,8 @@ import com.parse.ParseUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 import avivbenyair.pokerfiveo.R;
@@ -105,9 +111,9 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
     }
 
     private void lookForGame() {
-        gameConnectivity.lookForRoom();
-        mainActivity.showLoadingDialog(true);
-
+       /* gameConnectivity.lookForRoom();
+        mainActivity.showLoadingDialog(true);*/
+        getKeyHash();
     }
 
 
@@ -140,7 +146,7 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         String opponentUserName = data.getString("userName");
         boolean whosStarts = data.getBoolean("whosStarts");
 
-        Log.d(TAG,"player Starts: "+whosStarts);
+        Log.d(TAG, "player Starts: " + whosStarts);
 
         Opponent opponent = new Opponent(opponentObjectID, opponentUserName);
         Player player = new Player(ParseUser.getCurrentUser().getObjectId(), ParseUser.getCurrentUser().getUsername());
@@ -148,7 +154,31 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
     }
 
     public void joinRoom(String gameID) {
+
         gameConnectivity.joinRoom(gameID);
+    }
+
+    private void getKeyHash(){
+
+        PackageInfo info;
+        try {
+            info = getActivity().getPackageManager().getPackageInfo("avivbenyair.pokerfiveo", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String something = new String(Base64.encode(md.digest(), 0));
+                //String something = new String(Base64.encodeBytes(md.digest()));
+                Log.e("hash key", something);
+            }
+        } catch (PackageManager.NameNotFoundException e1) {
+            Log.e("name not found", e1.toString());
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("no such an algorithm", e.toString());
+        } catch (Exception e) {
+            Log.e("exception", e.toString());
+        }
+
     }
 
 

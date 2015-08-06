@@ -26,7 +26,22 @@ public class Game {
     }
 
 
-    public Card drawNewCard() {
+    public Move autoDrawAndSelectRow() {
+
+        Card card = drawNewCard();
+        int position = player.getPositionX();
+        Move move = new Move(card, player.getPositionX());
+
+        player.setPositionX(player.getPositionX() + 1);
+        if (player.getPositionX() > 4) {
+            player.setPositionX(0);
+        }
+
+        return move;
+    }
+
+
+    private Card drawNewCard() {
         return deck.getTop();
     }
 

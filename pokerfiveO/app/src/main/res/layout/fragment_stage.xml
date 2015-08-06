@@ -106,6 +106,15 @@
                 android:layout_below="@+id/playerTurn"
                 android:layout_centerHorizontal="true" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/winLog"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="49dp" />
+
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

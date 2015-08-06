@@ -42,15 +42,13 @@ public class FragmentStage extends Fragment {
     private Button sendMoveBTN;
 
     private RadioButton playerTurn;
-    private TextView playerCardsTXT, opponentCardsTXT, cardLeft;
+    private TextView playerCardsTXT, opponentCardsTXT, cardLeft, winLog;
     private Game game;
 
 
     public FragmentStage(MainActivity mainActivity, Game game) {
-
         this.game = game;
         this.mainActivity = mainActivity;
-
     }
 
     @Override
@@ -74,18 +72,21 @@ public class FragmentStage extends Fragment {
         handler = new Handler();
         gameConnectivity = new GameConnectivity(game.getOpponent().getObjectID());
 
+        playerTurn = (RadioButton) v.findViewById(R.id.playerTurn);
+        winLog = (TextView) v.findViewById(R.id.winLog);
+
 
         sendMoveBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                if (game.getDeck().getSize() > 0) {
+                if (game.getDeck().getSize() > 2) {
                     turnHandler(false);
-                    Card card = drawCard();
+                    //  Card card = drawCard();
+                    //   putCardInDeck(true, card);
 
-
-                    Move move = new Move(card, getValidHand());
+                    Move move = game.autoDrawAndSelectRow();
                     actMove(move);
 
                 } else {
@@ -108,24 +109,27 @@ public class FragmentStage extends Fragment {
         return v;
     }
 
-    private int getValidHand() {
+    /*private int getValidHand() {
         Log.d(TAG, "getValidHand getValidHand: getValidHand " + "getValidHand");
         boolean fullRow = true;
         int x = 0;
         for (int i = 0; i < game.getPlayer().getCards().size(); i++) {
-
+            Log.d(TAG, "game.getPlayer().getCards().get(i).size(" + i + "): " + game.getPlayer().getCards().get(i).size());
             if (game.getPlayer().getCards().get(i).size() == game.getHandPositionY()) {
                 x = i;
-                Log.d(TAG, "game.getPlayer().getCards().get(i).size(): " + game.getPlayer().getCards().get(i).size());
+
                 i = game.getPlayer().getCards().size();
                 fullRow = false;
 
             }
 
             if (fullRow) {
-                Log.d(TAG, "fullRow fullRow: " + true);
+                Log.d(TAG, " fullRow = true;  fullRow = true;  fullRow = true");
                 game.setHandPositionY(game.getHandPositionY() + 1);
                 return getValidHand();
+
+            } else {
+                Log.d(TAG, " fullRow = false;  fullRow = false;  fullRow = false;");
             }
 
         }
@@ -136,9 +140,9 @@ public class FragmentStage extends Fragment {
         Log.d(TAG, "Hands number: " + game.getPlayer().getCards().size());
         return x;
 
-    }
+    }*/
 
-    private void putCardInDeck(boolean isPlayer, Card card) {
+/*    private void putCardInDeck(boolean isPlayer, Card card) {
 
         boolean fullRow = true;
 
@@ -146,6 +150,7 @@ public class FragmentStage extends Fragment {
             for (int i = 0; i < game.getPlayer().getCards().size(); i++) {
 
                 if (game.getPlayer().getCards().get(i).size() == game.getHandPositionY()) {
+                    Log.d(TAG, "game.getPlayer().getCards().get(" + i + ").size(): " + game.getPlayer().getCards().get(i).size() + " , " + "game.getHandPositionY(): " + game.getHandPositionY());
                     game.getPlayer().getCards().get(i).add(card);
                     i = game.getPlayer().getCards().size();
                     fullRow = false;
@@ -163,6 +168,7 @@ public class FragmentStage extends Fragment {
             for (int i = 0; i < game.getOpponent().getCards().size(); i++) {
 
                 if (game.getOpponent().getCards().get(i).size() == game.getHandPositionY()) {
+                    Log.d(TAG, "game.getOpponent().getCards().get(" + i + ").size(): " + game.getOpponent().getCards().get(i).size() + " , " + "game.getHandPositionY(): " + game.getHandPositionY());
                     game.getOpponent().getCards().get(i).add(card);
                     i = game.getOpponent().getCards().size();
                     fullRow = false;
@@ -175,16 +181,18 @@ public class FragmentStage extends Fragment {
             }
         }
 
-    }
+    }*/
 
 
     private void turnHandler(boolean isPlayerTurn) {
 
         if (isPlayerTurn) {
             enableButtons(true);
+            playerTurn.setChecked(true);
 
         } else {
             enableButtons(false);
+            playerTurn.setChecked(false);
         }
 
     }
@@ -196,7 +204,10 @@ public class FragmentStage extends Fragment {
 
     public void actMove(Move move) {
 
+
         addUsedCard(true, move);
+
+
     }
 
     private void sendMoveToOpponent(Move move) {
@@ -213,10 +224,10 @@ public class FragmentStage extends Fragment {
         cardLeft.setText("Cards Left: " + game.getDeck().getSize());
     }
 
-    private Card drawCard() {
+    /*private Card drawCard() {
         Card card = game.drawNewCard();
         return card;
-    }
+    }*/
 
     private void addUsedCard(boolean isPlayer, Move move) {
         Log.d(TAG, "addUsedCard has been called on card: " + move.getCard().getValue());
@@ -310,9 +321,11 @@ public class FragmentStage extends Fragment {
         if (playerWins > opponentWins) {
             //Player won
             Log.d(TAG, "Player won Player won Player won Player won Player won Player won Player won ");
+            winLog.setText("Player won Player won");
         } else {
             //opponent Won
             Log.d(TAG, "opponent Won opponent Won opponent Won opponent Won opponent Won opponent Won ");
+            winLog.setText("opponent Won opponent Won");
         }
 
 
@@ -322,21 +335,34 @@ public class FragmentStage extends Fragment {
     public void opponenMoveHandler(Move move) {
 
 
-        if (game.getDeck().getSize() > 0) {
+        if (game.getDeck().getSize() > 2) {
             addUsedCard(false, move);
             turnHandler(true);
 
 
 //fast turns
-            turnHandler(false);
-            Card card = drawCard();
-            Move move1 = new Move(card, getValidHand());
-            actMove(move1);
+
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    turnHandler(false);
+                    Move move1 = game.autoDrawAndSelectRow();
+                    actMove(move1);
+                }
+            }, 700);
+
+            //Move move1 = new Move(card, game.getHandPositionY());
+            //putCardInDeck(false, card);
 
 
         } else {
             try {
                 endGame();
+                Log.d(TAG, "Deck: " + game.getDeck().getSize());
+
+                Log.d(TAG, "player cards: " + game.getPlayer().getCards().size());
+                Log.d(TAG, "Opponent cards: " + game.getOpponent().getCards().size());
             } catch (TooManyCardsException e) {
                 e.printStackTrace();
             } catch (TooFewCardsException e) {
@@ -344,10 +370,6 @@ public class FragmentStage extends Fragment {
             }
         }
 
-
-    }
-
-    public void sendAutoCard(boolean isPlayer, Card card) {
 
     }
 

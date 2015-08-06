@@ -61,15 +61,21 @@ public class GameConnectivity {
         });
     }
 
-    public void joinRoom(String gameID) {
-
+    public void joinRoom(final String gameID) {
+        Log.d(TAG, "joinRoom zzzzzzzzzzzzzzzzzzzzz: " + gameID);
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Games");
         query.getInBackground(gameID, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject parseObject, ParseException e) {
-                parseObject.put("open", false);
-                parseObject.add("players", ParseUser.getCurrentUser().getObjectId());
-                parseObject.saveInBackground();
+                if (e == null) {
+                    parseObject.put("open", false);
+                    parseObject.add("players", ParseUser.getCurrentUser().getObjectId());
+                    parseObject.saveInBackground();
+                    Log.d(TAG, "joinRoom zzzzzzzzzzzzzzzzzzzzz: " + gameID);
+                } else {
+                    Log.d(TAG, "joinRoom Error: " + e.getMessage());
+                }
+
             }
         });
     }
